@@ -1,0 +1,15 @@
+{
+  "name": "SPUR — Vancouver",
+  "short_name": "SPUR",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "icons": [
+    {
+      "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAACXBIWXMAAAsTAAALEwEAmpwYAAAKTWlDQ1BQaG90byBJQ0MgcHJvZmlsZQAAeJztwTEOAkEQBNCvXQ2S/DdzpB+JjQQgQp6jU9S704LuvmX30B/Qh2JpYWFmaWnl7uXp5a3v5e3tHRAREREREREREREREREREREREREREREREREREREREREREREREREREREREREf4DPyM4h1d75fWcAAAAASUVORK5CYII=",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPUR Montreal | Show Up Ready</title>
+    <title>SPUR Vancouver | Show Up Ready</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#0d0d0d">
@@ -286,12 +286,6 @@
             line-height: 1.1;
         }
 
-        .ready-circle-sub {
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-
         .cta-footer-note {
             font-size: 11px;
             color: var(--text-muted);
@@ -537,7 +531,7 @@
                 <!-- Live Status Badge -->
                 <div class="live-badge">
                     <div class="live-dot"></div>
-                    <span data-en="Montreal • Plateau • Live" data-fr="Montréal • Plateau • Actif">Montreal • Plateau • Live</span>
+                    <span data-en="Vancouver • Yaletown • Live" data-fr="Vancouver • Yaletown • Actif">Vancouver • Yaletown • Live</span>
                 </div>
                 <!-- Language Toggle -->
                 <div class="lang-toggle">
@@ -614,7 +608,7 @@
             </p>
             
             <form id="verifyForm" action="https://formspree.io/f/xlgkqnjw" method="POST" onsubmit="handleVerifySubmit(event)">
-                <input type="tel" class="modal-input" name="client_phone" placeholder="10 Digits (e.g. 5141234567)" id="phoneInput" required pattern="[0-9]{10}">
+                <input type="tel" class="modal-input" name="client_phone" placeholder="10 Digits (e.g. 6041234567)" id="phoneInput" required pattern="[0-9]{10}">
                 <button type="submit" class="modal-btn" data-en="Confirm & Find Match" data-fr="Confirmer & Trouver un Match">CONFIRM & FIND MATCH</button>
             </form>
             
@@ -663,7 +657,7 @@
                     <div class="grid-box-lbl" data-en="Minutes" data-fr="Minutes">Minutes</div>
                 </div>
                 <div class="receipt-grid-box">
-                    <div class="grid-box-val">Plateau</div>
+                    <div class="grid-box-val">Yaletown</div>
                     <div class="grid-box-lbl" data-en="Target Area" data-fr="Zone Cible">Target Area</div>
                 </div>
             </div>
@@ -689,7 +683,7 @@
                 }
             });
 
-            localStorage.setItem('spur_montreal_lang', lang);
+            localStorage.setItem('spur_vancouver_lang', lang);
         }
 
         // Modal Controls
@@ -711,7 +705,7 @@
         async function handleCodeSubmit(event) {
             event.preventDefault();
             const codeVal = document.getElementById('spurInput').value.trim();
-            const currentLang = localStorage.getItem('spur_montreal_lang') || 'en';
+            const currentLang = localStorage.getItem('spur_vancouver_lang') || 'en';
 
             if (codeVal.toLowerCase().startsWith('spur')) {
                 const form = event.target;
@@ -733,23 +727,21 @@
         async function handleVerifySubmit(event) {
             event.preventDefault();
             const phoneVal = document.getElementById('phoneInput').value.trim();
-            const currentLang = localStorage.getItem('spur_montreal_lang') || 'en';
+            const currentLang = localStorage.getItem('spur_vancouver_lang') || 'en';
 
             if (phoneVal.length >= 10) {
                 const form = event.target;
                 const formData = new FormData(form);
 
-                // Update final screen text with user's phone line nicely
+                // Update final screen text with user's phone line neatly
                 document.getElementById('displayPhoneLine').innerText = (currentLang === 'fr' ? "LIGNE DIRECTE : " : "DISPATCH LINE: ") + phoneVal;
 
                 try {
-                    // Send data silently in background to Formspree without hanging
                     fetch(form.action, { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } });
                 } catch (e) {
                     console.log("Background sync initiated");
                 }
 
-                // Transition views instantly
                 closeVerifyModal();
                 document.getElementById('mainAppContainer').style.display = 'none';
                 document.getElementById('finalSuccessView').style.display = 'block';
@@ -761,7 +753,7 @@
 
         // Auto-load preferred language on startup
         window.addEventListener('DOMContentLoaded', () => {
-            const savedLang = localStorage.getItem('spur_montreal_lang') || 'en';
+            const savedLang = localStorage.getItem('spur_vancouver_lang') || 'en';
             switchLanguage(savedLang);
         });
     </script>

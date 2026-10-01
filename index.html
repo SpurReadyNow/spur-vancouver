@@ -3,258 +3,767 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPUR — Vancouver Pilot</title>
-    
-    <link rel="manifest" href="manifest.json">
+    <title>SPUR Montreal | Show Up Ready</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#0a0a0a">
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#0d0d0d">
+    
     <style>
-        body { 
-            background-color: #0a0a0a; 
-            background-image: radial-gradient(circle at 50% 75%, rgba(212, 175, 55, 0.08) 0%, #0a0a0a 60%);
-            font-family: 'Inter', sans-serif; 
+        :root {
+            --bg-color: #0d0d0d;
+            --gold: #d4af37;
+            --gold-light: #f3e5ab;
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            --card-bg: #141414;
+            --border-color: rgba(212, 175, 55, 0.25);
         }
-        .font-serif { font-family: 'Playfair Display', serif; }
-        .gold-text { color: #D4AF37; }
-        .gold-btn-3d {
-            background: linear-gradient(135deg, #FFF0B3 0%, #D4AF37 45%, #996B00 100%);
-            box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.5), inset 0 -4px 8px rgba(80, 50, 0, 0.8), 0 10px 20px rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 240, 179, 0.4);
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
-        .gold-btn-3d:hover { background: linear-gradient(135deg, #FFF6CC 0%, #E5C158 45%, #B38000 100%); }
-        @keyframes subtlePulse {
-            0% { box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.5), inset 0 -4px 8px rgba(80, 50, 0, 0.8), 0 0 20px rgba(212, 175, 55, 0.15); transform: scale(1); }
-            50% { box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.5), inset 0 -4px 8px rgba(80, 50, 0, 0.8), 0 0 45px rgba(212, 175, 55, 0.4); transform: scale(1.02); }
-            100% { box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.5), inset 0 -4px 8px rgba(80, 50, 0, 0.8), 0 0 20px rgba(212, 175, 55, 0.15); transform: scale(1); }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 20px;
+            position: relative;
         }
-        .breathe-animation { animation: subtlePulse 3.5s infinite ease-in-out; }
-        input[type="tel"] { background: rgba(20, 20, 20, 0.8); border: 1px solid rgba(212, 175, 55, 0.3); color: white; text-align: center; }
-        input[type="tel"]:focus { outline: none; border-color: #D4AF37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
+
+        /* Top Header Layout */
+        .header-container {
+            width: 100%;
+            max-width: 440px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+
+        .logo-area h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: 6px;
+            color: var(--text-main);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .logo-area span {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        .top-right-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .live-dot {
+            width: 5px;
+            height: 5px;
+            background-color: #2ecc71;
+            border-radius: 50%;
+            box-shadow: 0 0 6px #2ecc71;
+        }
+
+        /* Language Toggle */
+        .lang-toggle {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 4px 10px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .lang-toggle button {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 3px;
+            transition: color 0.2s ease;
+        }
+
+        .lang-toggle button.active {
+            color: var(--gold);
+        }
+
+        .lang-toggle span {
+            color: #444;
+            margin: 0 3px;
+            font-size: 11px;
+        }
+
+        /* Main Content */
+        .main-content {
+            width: 100%;
+            max-width: 440px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-section {
+            width: 100%;
+            text-align: left;
+        }
+
+        .hero-title {
+            font-size: 28px;
+            font-weight: 400;
+            line-height: 1.35;
+            letter-spacing: -0.5px;
+            margin-bottom: 16px;
+            color: var(--text-main);
+        }
+
+        .hero-title-gold {
+            font-size: 28px;
+            font-weight: 400;
+            line-height: 1.35;
+            letter-spacing: -0.5px;
+            margin-bottom: 30px;
+            color: var(--gold);
+        }
+
+        /* Steps list */
+        .steps-list {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 30px;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 14px 18px;
+            border-radius: 16px;
+        }
+
+        .step-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            background: rgba(212, 175, 55, 0.03);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--gold);
+            flex-shrink: 0;
+            font-size: 14px;
+        }
+
+        .step-text {
+            font-size: 16px;
+            color: var(--text-main);
+            font-weight: 400;
+        }
+
+        /* Pilot Box */
+        .pilot-box {
+            width: 100%;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 35px;
+        }
+
+        .pilot-label-top {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .pilot-label-sub {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .pilot-price-area {
+            text-align: right;
+        }
+
+        .pilot-price {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 4px;
+        }
+
+        .pilot-code-link {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: 0.5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .pilot-code-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Circular Breathing Ready Now Button */
+        @keyframes breathing {
+            0% { transform: scale(1); box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+            50% { transform: scale(1.04); box-shadow: 0 0 35px rgba(212, 175, 55, 0.6); }
+            100% { transform: scale(1); box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+        }
+
+        .ready-circle-btn {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #d4af37 0%, #aa8c2c 100%);
+            color: #0d0d0d;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: none;
+            cursor: pointer;
+            animation: breathing 3s infinite ease-in-out;
+            margin: 10px auto 20px auto;
+            text-align: center;
+            transition: transform 0.1s ease;
+        }
+
+        .ready-circle-btn:active {
+            transform: scale(0.96);
+        }
+
+        .ready-circle-text {
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            line-height: 1.1;
+        }
+
+        .ready-circle-sub {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .cta-footer-note {
+            font-size: 11px;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .brand-philosophy {
+            font-size: 14px;
+            color: var(--gold-light);
+            font-style: italic;
+            letter-spacing: 0.5px;
+            margin-top: 10px;
+        }
+
+        /* Interactive Modals */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(6px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            padding: 20px;
+        }
+
+        .modal-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 28px 24px;
+            width: 100%;
+            max-width: 380px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+        }
+
+        .modal-card h3 {
+            color: var(--gold);
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .modal-card p {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .modal-input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 14px;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 16px;
+            text-align: center;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        .modal-input:focus {
+            border-color: var(--gold);
+            outline: none;
+        }
+
+        .modal-btn {
+            background: var(--gold);
+            color: #0d0d0d;
+            border: none;
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 12px;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+        }
+
+        /* Final Request Received Card View */
+        #finalSuccessView {
+            display: none;
+            width: 100%;
+            max-width: 440px;
+            text-align: center;
+        }
+
+        .success-header-tag {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--gold);
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 6px 14px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .success-main-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .success-sub-title {
+            font-size: 15px;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        .success-receipt-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 28px 24px;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+        }
+
+        .success-receipt-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gold);
+        }
+
+        .receipt-top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .receipt-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .receipt-updates-tag {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .receipt-price-box {
+            text-align: right;
+        }
+
+        .receipt-price {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .receipt-price-label {
+            font-size: 10px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .receipt-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .receipt-grid-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .grid-box-val {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .grid-box-lbl {
+            font-size: 10px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .receipt-footer-desc {
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.5;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: 16px;
+        }
     </style>
 </head>
-<body class="text-zinc-50 min-h-screen flex flex-col selection:bg-[#D4AF37] selection:text-black">
-    <div class="flex-grow flex flex-col p-6 max-w-md mx-auto w-full relative">
-        <main id="main-content" class="flex-grow flex flex-col justify-center py-4"></main>
+<body>
+
+    <!-- MAIN APP SCREEN -->
+    <div class="main-content" id="mainAppContainer">
+        
+        <!-- Header Section -->
+        <div class="header-container">
+            <div class="logo-area">
+                <h1>SPUR</h1>
+                <span>SHOW UP READY™</span>
+            </div>
+            <div class="top-right-group">
+                <!-- Live Status Badge -->
+                <div class="live-badge">
+                    <div class="live-dot"></div>
+                    <span data-en="Montreal • Plateau • Live" data-fr="Montréal • Plateau • Actif">Montreal • Plateau • Live</span>
+                </div>
+                <!-- Language Toggle -->
+                <div class="lang-toggle">
+                    <button onclick="switchLanguage('en')" id="btn-en" class="active">EN</button>
+                    <span>|</span>
+                    <button onclick="switchLanguage('fr')" id="btn-fr">FR</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-section">
+            <div class="hero-title" data-en="You don't need to know what will make you look better." data-fr="Vous n'avez pas besoin de savoir ce qui vous mettra en valeur.">
+                You don't need to know what will make you look better.
+            </div>
+
+            <div class="hero-title-gold" data-en="That's what we're here for." data-fr="C'est exactement pour cela que nous sommes là.">
+                That's what we're here for.
+            </div>
+
+            <!-- 4 Steps List -->
+            <div class="steps-list">
+                <div class="step-item">
+                    <div class="step-icon">👤</div>
+                    <div class="step-text" data-en="We find your specialist." data-fr="Nous trouvons votre spécialiste.">We find your specialist.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-icon">🔍</div>
+                    <div class="step-text" data-en="They know exactly what you need." data-fr="Ils savent exactement ce dont vous avez besoin.">They know exactly what you need.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-icon">✓</div>
+                    <div class="step-text" data-en="You approve." data-fr="Vous approuvez.">You approve.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-icon">✨</div>
+                    <div class="step-text" data-en="You get ready." data-fr="Vous vous préparez.">You get ready.</div>
+                </div>
+            </div>
+
+            <!-- Pilot Flat Rate Box -->
+            <div class="pilot-box">
+                <div>
+                    <div class="pilot-label-top" data-en="Pilot Flat Rate" data-fr="Tarif Fixe Pilote">Pilot Flat Rate</div>
+                    <div class="pilot-label-sub" data-en="Complete grooming & styling" data-fr="Coiffure et style complets">Complete grooming & styling</div>
+                </div>
+                <div class="pilot-price-area">
+                    <div class="pilot-price">$49.99 CAD</div>
+                    <button class="pilot-code-link" onclick="openCodeModal()" data-en="+ HAVE SPurtan CODE?" data-fr="+ AVEZ-VOUS UN CODE SPURTAN?">+ HAVE SPurtan CODE?</button>
+                </div>
+            </div>
+
+            <!-- Circular Breathing Ready Now Button -->
+            <div style="text-align: center; width: 100%;">
+                <button class="ready-circle-btn" onclick="openVerifyModal()">
+                    <span class="ready-circle-text" data-en="READY" data-fr="PRÊT">READY</span>
+                    <span class="ready-circle-text" data-en="NOW™" data-fr="MAINTENANT™">NOW™</span>
+                </button>
+                <div class="cta-footer-note" data-en="Tap to find match • No payment upfront" data-fr="Appuyez pour trouver un match • Aucun paiement à l'avance">
+                    Tap to find match • No payment upfront
+                </div>
+                <div class="brand-philosophy" data-en="We look at you, not a menu." data-fr="Nous regardons vous, pas un menu.">
+                    We look at you, not a menu.
+                </div>
+            </div>
+        </div>
     </div>
+
+    <!-- VERIFICATION MODAL (Step 2: Enter Phone Number) -->
+    <div id="verifyModal" class="modal-overlay">
+        <div class="modal-card">
+            <h3 data-en="Verify Identity" data-fr="Vérifier l'identité">Verify Identity</h3>
+            <p data-en="Enter your mobile number. We will text you your match details." data-fr="Entrez votre numéro de mobile. Nous vous enverrons les détails de votre match.">
+                Enter your mobile number. We will text you your match details.
+            </p>
+            
+            <form id="verifyForm" action="https://formspree.io/f/xlgkqnjw" method="POST" onsubmit="handleVerifySubmit(event)">
+                <input type="tel" class="modal-input" name="client_phone" placeholder="10 Digits (e.g. 5141234567)" id="phoneInput" required pattern="[0-9]{10}">
+                <button type="submit" class="modal-btn" data-en="Confirm & Find Match" data-fr="Confirmer & Trouver un Match">CONFIRM & FIND MATCH</button>
+            </form>
+            
+            <button class="modal-close" onclick="closeVerifyModal()" data-en="Cancel" data-fr="Annuler">CANCEL</button>
+        </div>
+    </div>
+
+    <!-- SPURTAN CODE MODAL -->
+    <div id="codeModal" class="modal-overlay">
+        <div class="modal-card">
+            <h3 data-en="Enter SPurtan Code" data-fr="Entrez votre code SPurtan">Enter SPurtan Code</h3>
+            <p data-en="Please enter your unique membership format code (e.g., Spur____)" data-fr="Veuillez entrer votre format de code unique (ex : Spur____)">
+                Please enter your unique membership format code (e.g., Spur____)
+            </p>
+            
+            <form id="spurtanForm" action="https://formspree.io/f/xlgkqnjw" method="POST" onsubmit="handleCodeSubmit(event)">
+                <input type="text" class="modal-input" name="spurtan_code" placeholder="Spur____" id="spurInput" required>
+                <button type="submit" class="modal-btn" data-en="Apply Code" data-fr="Appliquer le code">Apply Code</button>
+            </form>
+            
+            <button class="modal-close" onclick="closeCodeModal()" data-en="Cancel" data-fr="Annuler">Cancel</button>
+        </div>
+    </div>
+
+    <!-- FINAL CONFIRMATION SCREEN (Check Your Messages) -->
+    <div id="finalSuccessView">
+        <div class="success-header-tag" data-en="Priority Dispatch" data-fr="Expédition Prioritaire">Priority Dispatch</div>
+        <div class="success-main-title" data-en="Request Received." data-fr="Demande Reçue.">Request Received.</div>
+        <div class="success-sub-title" data-en="We are securing your specialist." data-fr="Nous assurons votre spécialiste.">We are securing your specialist.</div>
+
+        <div class="success-receipt-card">
+            <div class="receipt-top-row">
+                <div>
+                    <div class="receipt-title" data-en="Check your messages" data-fr="Vérifiez vos messages">Check your messages</div>
+                    <div class="receipt-updates-tag" id="displayPhoneLine">DISPATCH LINE: ACTIVE</div>
+                </div>
+                <div class="receipt-price-box">
+                    <div class="receipt-price">$49.99</div>
+                    <div class="receipt-price-label" data-en="Pilot Rate" data-fr="Tarif Pilote">Pilot Rate</div>
+                </div>
+            </div>
+
+            <div class="receipt-grid">
+                <div class="receipt-grid-box">
+                    <div class="grid-box-val">&lt; 3</div>
+                    <div class="grid-box-lbl" data-en="Minutes" data-fr="Minutes">Minutes</div>
+                </div>
+                <div class="receipt-grid-box">
+                    <div class="grid-box-val">Plateau</div>
+                    <div class="grid-box-lbl" data-en="Target Area" data-fr="Zone Cible">Target Area</div>
+                </div>
+            </div>
+
+            <div class="receipt-footer-desc" data-en="Your concierge is coordinating with our studio partners. You will pay the flat $49.99 fee directly at the studio after your transformation." data-fr="Votre concierge coordonne avec nos partenaires en studio. Vous paierez les frais fixes de 49,99 $ directement au studio après votre transformation.">
+                Your concierge is coordinating with our studio partners. You will pay the flat $49.99 fee directly at the studio after your transformation.
+            </div>
+        </div>
+    </div>
+
     <script>
-        let storedPhone = localStorage.getItem('spur_client_phone') || null;
-        let isEarlySpurtan = localStorage.getItem('spur_early_spurtan') === 'true';
-        let currentState = 'idle';
+        // Language switching engine
+        function switchLanguage(lang) {
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+            document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
 
-        function render() {
-            const main = document.getElementById('main-content');
-            const currentPrice = isEarlySpurtan ? '$39.99' : '$49.99';
-            const priceLabel = isEarlySpurtan ? 'Early Spurtan Pilot Rate' : 'Pilot Flat Rate';
+            const elements = document.querySelectorAll('[data-en]');
+            elements.forEach(el => {
+                if (lang === 'fr') {
+                    if (el.hasAttribute('data-fr')) el.innerText = el.getAttribute('data-fr');
+                } else {
+                    if (el.hasAttribute('data-en')) el.innerText = el.getAttribute('data-en');
+                }
+            });
 
-            if (currentState === 'idle') {
-                main.innerHTML = `
-                    <div class="space-y-7">
-                        <div class="flex justify-between items-start mt-2">
-                            <div class="space-y-1">
-                                <h1 class="text-3xl font-serif tracking-[0.15em]">SPUR</h1>
-                                <p class="gold-text text-[10px] tracking-[0.2em] uppercase">Show up ready&trade;</p>
-                            </div>
-                            <div class="flex items-center gap-2 bg-zinc-900/90 px-3 py-1.5 rounded-full border border-zinc-800 shadow-lg backdrop-blur-sm">
-                                <div class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></div>
-                                <span class="text-[9px] text-zinc-300 tracking-wider uppercase">Yaletown: Live</span>
-                            </div>
-                        </div>
-
-                        <div class="font-serif text-[1.6rem] leading-snug tracking-wide">
-                            <p class="text-zinc-100">You don't need to know<br>what will make you<br>look better.</p>
-                            <p class="gold-text mt-2">That's what we're here for.</p>
-                        </div>
-
-                        <div class="space-y-3.5 pt-1">
-                            <div class="flex items-center gap-4">
-                                <div class="w-[34px] h-[34px] rounded-full border border-[#D4AF37]/40 flex items-center justify-center shrink-0 bg-[#D4AF37]/5"><svg class="w-3.5 h-3.5 gold-text" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" /></svg></div>
-                                <p class="text-zinc-200 text-base font-light tracking-wide">We find your specialist.</p>
-                            </div>
-                            <div class="flex items-center gap-4">
-                                <div class="w-[34px] h-[34px] rounded-full border border-[#D4AF37]/40 flex items-center justify-center shrink-0 bg-[#D4AF37]/5"><svg class="w-3.5 h-3.5 gold-text" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg></div>
-                                <p class="text-zinc-200 text-base font-light tracking-wide">They know exactly what you need.</p>
-                            </div>
-                            <div class="flex items-center gap-4">
-                                <div class="w-[34px] h-[34px] rounded-full border border-[#D4AF37]/40 flex items-center justify-center shrink-0 bg-[#D4AF37]/5"><svg class="w-3.5 h-3.5 gold-text" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg></div>
-                                <p class="text-zinc-200 text-base font-light tracking-wide">You approve.</p>
-                            </div>
-                            <div class="flex items-center gap-4">
-                                <div class="w-[34px] h-[34px] rounded-full border border-[#D4AF37]/40 flex items-center justify-center shrink-0 bg-[#D4AF37]/5"><svg class="w-3.5 h-3.5 gold-text" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09l2.846.813-2.846.813a4.5 4.5 0 0 0-3.09-3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" /></svg></div>
-                                <p class="text-zinc-200 text-base font-light tracking-wide">You get ready.</p>
-                            </div>
-                        </div>
-
-                        <div class="bg-zinc-900/80 border border-[#D4AF37]/30 rounded-2xl py-3 px-4 text-center backdrop-blur-sm shadow-inner space-y-1">
-                            <div class="flex justify-between items-center px-1">
-                                <span class="text-zinc-400 text-[11px] tracking-wider uppercase font-medium">${priceLabel}</span>
-                                <span class="gold-text font-bold text-base">${currentPrice} CAD</span>
-                            </div>
-                            <div class="pt-1 border-t border-zinc-800/80 flex justify-between items-center text-[10px] text-zinc-500">
-                                <span>Complete grooming & styling</span>
-                                <button onclick="toggleSpurtan()" class="gold-text hover:underline cursor-pointer uppercase tracking-wider font-semibold">
-                                    ${isEarlySpurtan ? '✓ Early Spurtan Active' : '+ Have Spurtan Code?'}
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-col items-center justify-center pt-1 pb-2 gap-3.5">
-                            <button onclick="handleReadyNow()" class="w-[130px] h-[130px] rounded-full gold-btn-3d breathe-animation flex flex-col items-center justify-center transition-all group cursor-pointer">
-                                <span class="text-black font-bold tracking-widest text-lg drop-shadow-md group-hover:scale-105 transition-transform">READY</span>
-                                <span class="text-black font-bold tracking-widest text-lg drop-shadow-md group-hover:scale-105 transition-transform">NOW&trade;</span>
-                            </button>
-                            <p class="text-zinc-500 text-[10px] uppercase tracking-widest font-medium">Tap to find match • No payment upfront</p>
-                        </div>
-
-                        <div class="text-center pb-2">
-                            <p class="gold-text italic font-serif text-[1rem] tracking-wide opacity-90">We look at you, not a menu.</p>
-                        </div>
-                    </div>
-                `;
-            } else if (currentState === 'capture_phone') {
-                main.innerHTML = `
-                    <div class="space-y-8 flex flex-col items-center py-10 h-full justify-center">
-                        <div class="text-center space-y-4">
-                            <h2 class="text-3xl font-serif tracking-wide">Verify Identity</h2>
-                            <p class="text-zinc-400 font-light text-sm max-w-[250px] mx-auto">Enter your mobile number. We will text you your match details.</p>
-                        </div>
-                        <div class="w-full max-w-[280px] space-y-5">
-                            <input type="tel" id="phone-input" placeholder="10 Digits (e.g. 6041234567)" class="w-full py-4 text-xl rounded-xl tracking-wider transition-all" autocomplete="tel"/>
-                            <button onclick="submitPhone()" class="w-full gold-btn-3d text-black font-semibold tracking-wider uppercase text-sm py-4 rounded-xl flex justify-center items-center transition cursor-pointer hover:brightness-110 shadow-lg shadow-[#D4AF37]/10">Confirm & Find Match</button>
-                        </div>
-                        <button onclick="cancelApp()" class="text-zinc-500 text-[10px] uppercase tracking-widest mt-6 hover:text-zinc-300 transition-colors">Cancel</button>
-                    </div>
-                `;
-            } else if (currentState === 'loading') {
-                main.innerHTML = `
-                    <div class="text-center space-y-8 flex flex-col items-center py-20 h-full justify-center">
-                        <div class="w-20 h-20 border-[3px] border-zinc-800 border-t-[#D4AF37] rounded-full animate-spin shadow-lg shadow-[#D4AF37]/5"></div>
-                        <div class="space-y-4 font-serif">
-                            <h3 class="text-3xl tracking-wide">Locating Specialist</h3>
-                            <p class="gold-text italic text-xl opacity-90">Preparing your diagnosis...</p>
-                        </div>
-                    </div>
-                `;
-            } else if (currentState === 'matched') {
-                main.innerHTML = `
-                    <div class="space-y-8 py-6 flex flex-col justify-center min-h-[70vh]">
-                        <div class="text-center space-y-3">
-                            <span class="inline-block px-4 py-1.5 rounded-full bg-[#D4AF37]/10 gold-text font-medium text-[10px] tracking-[0.2em] border border-[#D4AF37]/30 uppercase shadow-sm">Priority Dispatch</span>
-                            <h2 class="text-4xl font-serif tracking-wide">Request<br>Received.</h2>
-                            <p class="text-zinc-400 font-light text-base">We are securing your specialist.</p>
-                        </div>
-
-                        <div class="bg-zinc-900/60 rounded-3xl p-6 border border-zinc-700/50 space-y-6 relative overflow-hidden backdrop-blur-md shadow-2xl">
-                            <div class="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-[#FFF0B3] to-[#D4AF37]"></div>
-                            
-                            <div class="flex items-start justify-between">
-                                <div>
-                                    <h4 class="text-xl font-serif tracking-wide">Check your messages</h4>
-                                    <p class="gold-text text-xs mt-1 uppercase tracking-widest">Updates to: <span class="text-white">${storedPhone}</span></p>
-                                </div>
-                                <div class="text-right">
-                                    <span class="gold-text text-lg font-semibold">${currentPrice}</span>
-                                    <p class="text-zinc-500 text-[9px] uppercase tracking-wider">${isEarlySpurtan ? 'Early Spurtan' : 'Pilot Rate'}</p>
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-2 gap-4 text-center">
-                                <div class="bg-black/60 rounded-2xl p-4 border border-zinc-800/80 flex flex-col justify-center items-center shadow-inner">
-                                    <div class="text-2xl font-light tracking-tight"><span class="text-lg opacity-50">&lt;</span> 3</div>
-                                    <div class="gold-text text-[9px] uppercase tracking-widest mt-1">Minutes</div>
-                                </div>
-                                <div class="bg-black/60 rounded-2xl p-4 border border-zinc-800/80 flex flex-col justify-center items-center shadow-inner">
-                                    <div class="text-lg font-light tracking-tight">Yaletown</div>
-                                    <div class="gold-text text-[9px] uppercase tracking-widest mt-1">Target Area</div>
-                                </div>
-                            </div>
-                            
-                            <p class="text-zinc-400 text-xs text-center leading-relaxed font-light">Your concierge is coordinating with our studio partners. You will pay the flat ${currentPrice} fee directly at the studio after your transformation.</p>
-                        </div>
-                    </div>
-                `;
-            }
+            localStorage.setItem('spur_montreal_lang', lang);
         }
 
-        function toggleSpurtan() {
-            if (!isEarlySpurtan) {
-                let code = prompt("Enter Early Spurtan Access Code (e.g., SPUR0009):");
-                if (!code) return;
-                let clean = code.trim().toUpperCase();
-                
-                let usedCodes = JSON.parse(localStorage.getItem('spur_used_codes') || "[]");
-                if (usedCodes.includes(clean)) {
-                    alert("❌ This code has already been redeemed on this device.");
-                    return;
-                }
-                
-                let isValid = false;
-                if (clean.startsWith("SPUR") && clean.length === 8) {
-                    let num = parseInt(clean.replace("SPUR", ""));
-                    if (!isNaN(num) && num >= 9 && num <= 900 && num % 9 === 0) {
-                        isValid = true;
-                    }
-                }
+        // Modal Controls
+        function openVerifyModal() {
+            document.getElementById('verifyModal').style.display = 'flex';
+        }
+        function closeVerifyModal() {
+            document.getElementById('verifyModal').style.display = 'none';
+        }
 
-                if (isValid) {
-                    usedCodes.push(clean);
-                    localStorage.setItem('spur_used_codes', JSON.stringify(usedCodes));
-                    
-                    isEarlySpurtan = true;
-                    localStorage.setItem('spur_early_spurtan', 'true');
-                    alert(`✨ Code ${clean} Accepted! Early Spurtan $39.99 rate unlocked.`);
-                    render();
-                } else {
-                    alert("❌ Invalid Code. Please use a valid unused code (SPUR0009 up to SPUR0900).");
+        function openCodeModal() {
+            document.getElementById('codeModal').style.display = 'flex';
+        }
+        function closeCodeModal() {
+            document.getElementById('codeModal').style.display = 'none';
+        }
+
+        // Handle Formspree Code Submission
+        async function handleCodeSubmit(event) {
+            event.preventDefault();
+            const codeVal = document.getElementById('spurInput').value.trim();
+            const currentLang = localStorage.getItem('spur_montreal_lang') || 'en';
+
+            if (codeVal.toLowerCase().startsWith('spur')) {
+                const form = event.target;
+                const formData = new FormData(form);
+                try {
+                    await fetch(form.action, { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } });
+                    alert(currentLang === 'fr' ? "✓ Code validé avec succès !" : "✓ Code successfully validated!");
+                    closeCodeModal();
+                    form.reset();
+                } catch (e) {
+                    alert(currentLang === 'fr' ? "Erreur réseau." : "Network error.");
                 }
             } else {
-                let confirmReset = confirm("Do you want to remove your Early Spurtan status?");
-                if (confirmReset) {
-                    isEarlySpurtan = false;
-                    localStorage.setItem('spur_early_spurtan', 'false');
-                    render();
+                alert(currentLang === 'fr' ? "Veuillez respecter le format Spur____" : "Please follow the Spur____ format");
+            }
+        }
+
+        // Handle Phone Verification & Seamless Transition to Final Screen
+        async function handleVerifySubmit(event) {
+            event.preventDefault();
+            const phoneVal = document.getElementById('phoneInput').value.trim();
+            const currentLang = localStorage.getItem('spur_montreal_lang') || 'en';
+
+            if (phoneVal.length >= 10) {
+                const form = event.target;
+                const formData = new FormData(form);
+
+                // Update final screen text with user's phone line nicely
+                document.getElementById('displayPhoneLine').innerText = (currentLang === 'fr' ? "LIGNE DIRECTE : " : "DISPATCH LINE: ") + phoneVal;
+
+                try {
+                    // Send data silently in background to Formspree without hanging
+                    fetch(form.action, { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } });
+                } catch (e) {
+                    console.log("Background sync initiated");
                 }
+
+                // Transition views instantly
+                closeVerifyModal();
+                document.getElementById('mainAppContainer').style.display = 'none';
+                document.getElementById('finalSuccessView').style.display = 'block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                alert(currentLang === 'fr' ? "Veuillez entrer un numéro valide à 10 chiffres." : "Please enter a valid 10-digit mobile number.");
             }
         }
 
-        function handleReadyNow() {
-            if (!storedPhone) { currentState = 'capture_phone'; render(); }
-            else { proceedToMatch(); }
-        }
-
-        function submitPhone() {
-            const inputField = document.getElementById('phone-input');
-            const phoneClean = inputField.value.replace(/\D/g, '');
-            if (phoneClean.length !== 10) {
-                alert("🚨 Operation Error:\nPlease enter exactly 10 digits.\nExample: 6041234567");
-                inputField.classList.add('border-red-500/50', 'bg-red-950/20');
-                return;
-            }
-            storedPhone = phoneClean;
-            localStorage.setItem('spur_client_phone', phoneClean);
-            proceedToMatch();
-        }
-
-        async function proceedToMatch() {
-            currentState = 'loading';
-            render();
-            try {
-                await fetch("https://formspree.io/f/mjykllwj", {
-                    method: "POST",
-                    headers: { "Accept": "application/json", "Content-Type": "application/json" },
-                    body: JSON.stringify({ Alert: "🚨 SPUR CLIENT REQUEST", Client_Phone: storedPhone, Target_Area: "Yaletown", Tier: isEarlySpurtan ? "Early Spurtan ($39.99)" : "Pilot Rate ($49.99)", Time: new Date().toLocaleTimeString() })
-                });
-            } catch (e) {}
-            setTimeout(() => { currentState = 'matched'; render(); }, 2500);
-        }
-
-        function cancelApp() { currentState = 'idle'; render(); }
-        render();
+        // Auto-load preferred language on startup
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('spur_montreal_lang') || 'en';
+            switchLanguage(savedLang);
+        });
     </script>
 </body>
 </html>
